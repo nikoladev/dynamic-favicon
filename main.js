@@ -34,7 +34,7 @@ const changeColor = ({ clientY }) => {
 
 let prevScrollY = Number.MIN_SAFE_INTEGER
 
-window.addEventListener('scroll', () => {
+const changeHueOnScroll = () => {
   const { scrollY } = window
   if (prevScrollY === scrollY) {
     return
@@ -48,4 +48,6 @@ window.addEventListener('scroll', () => {
   ctx.fill()
 
   link.href = canvas.toDataURL('image/png')
-})
+}
+
+window.addEventListener('scroll', changeHueOnScroll)
