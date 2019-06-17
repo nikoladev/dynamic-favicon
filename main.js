@@ -50,4 +50,34 @@ const changeHueOnScroll = () => {
   link.href = canvas.toDataURL('image/png')
 }
 
-window.addEventListener('scroll', changeHueOnScroll)
+// window.addEventListener('scroll', changeHueOnScroll)
+window.addEventListener('scroll', pickColorOnScroll)
+
+const colors = [
+  '#f6d369',
+  '#9ef6a0',
+  '#7ef6f3',
+  '#7e83f6',
+  '#d77ef6',
+  '#f67ea7',
+  '#f6653c',
+]
+
+function pickColorOnScroll() {
+  const { scrollY } = window
+  if (prevScrollY === scrollY) {
+    return
+  }
+
+  prevScrollY = scrollY
+
+  const colorsIx = Math.floor(scrollY / 100) % colors.length
+
+  ctx.clearRect(0, 0, size, size)
+  ctx.beginPath()
+  ctx.arc(halfSize, halfSize, halfSize - 1, 0, twoPi)
+  ctx.fillStyle = colors[colorsIx]
+  ctx.fill()
+
+  link.href = canvas.toDataURL('image/png')
+}
